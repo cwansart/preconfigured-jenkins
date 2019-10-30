@@ -6,4 +6,10 @@ RUN /usr/local/bin/install-plugins.sh git build-timeout credentials-binding \
                                       timestamper ws-cleanup ssh-slaves \
                                       workflow-aggregator pipeline-stage-view
 
+COPY docker-entrypoint.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 USER jenkins
+
+ENTRYPOINT ["/sbin/tini", "--", "docker-entrypoint.sh"]
+CMD ["/usr/local/bin/jenkins.sh"]
