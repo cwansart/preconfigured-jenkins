@@ -11,5 +11,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 USER jenkins
 
+VOLUME ["/var/lib/containers"]
+
 ENTRYPOINT ["/sbin/tini", "--", "docker-entrypoint.sh"]
 CMD ["/usr/local/bin/jenkins.sh"]
